@@ -1,0 +1,258 @@
+---
+title: "Bike Share: Time Series Analysis"
+author: "Rebecca Hadi"
+date: "12/16/2018"
+output: html_document
+---
+
+## Background & Approach
+
+As 2019 inches closer, I've been thinking about the purpose of my blog. I'd like to use my blog as a forum to practice skills I may not get the opportunity to use otherwise. And who knows, maybe by practicing these skills I will see opportunities to apply them in my current work. 
+
+With that, yes, this is another blog post exploring time series. This time, with Bikes!  I'm following along with this blog post (link)[https://www.datascience.com/blog/introduction-to-forecasting-with-arima-in-r-learn-data-science-tutorials], and the work herein is largely a reproduction of this helpful resource. 
+
+The core data set is related to the two-year historical log corresponding to years 2011 and 2012 from Capital Bike share system, Washington D.C., USA which is publicly available in http://capitalbikeshare.com/system-data.
+
+
+```{r setup, include=FALSE}
+# load packages
+library('ggplot2')
+library('forecast')
+library('tseries')
+library('ggthemes')
+library('ggfortify')
+```
+
+
+```{r, include = FALSE, message=FALSE, warning=FALSE}
+# load & look at data 
+daily_data = read.csv('day.csv', header=TRUE, stringsAsFactors=FALSE)
+```
+
+```{r, echo = FALSE, warning = FALSE, include = FALSE}
+# convert to date 
+daily_data$Date = as.Date(daily_data$dteday)
+
+# Step 1: plot the data 
+daily.plot <- ggplot(daily_data, aes(Date, cnt)) + 
+  geom_line() + 
+  scale_x_date('month')  + 
+  ylab("Daily Bike Checkouts") +
+  xlab("") + 
+  theme_classic()
+
+daily.plot + ggtitle("Bike Shares by Day")
+
+```
+
+Data appear to be seasonal with an increase in the summer time period, which is understandable given more people would be riding bikes in nice weather. 
+
+The typical value per day is between 2500 - 7000, but we observe outliers. To work with a cleaner time series, we will use tsclean() from the forecast package on the counts vector to remove outliers and impute any missing values. 
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+# convert into ts object (column count only)
+counts <- daily_data[c('cnt')] # extract column counts 
+count_ts = ts(counts) # convert this to time series 
+
+# use tsclean to remove outliers 
+daily_data$clean_cnt = forecast::tsclean(count_ts)
+
+ggplot() +
+  geom_line(data = daily_data, aes(x = Date, y = clean_cnt)) + 
+  ylab('Cleaned Bicycle Count') + 
+  ggtitle("Bike Share by day: Cleaned Time Series") + 
+  theme_classic()
+
+```
+This chart shows the comparison of volatility when viewing data at the day, weekly, and monthly moving averages. 
+
+```{r, echo = FALSE, warning = FALSE, echo = FALSE}
+daily_data$cnt_ma = forecast::ma(daily_data$clean_cnt, order=7) # using the clean count with no outliers
+daily_data$cnt_ma30 = forecast::ma(daily_data$clean_cnt, order=30)
+
+
+ggplot() +
+  geom_line(data = daily_data, aes(x = Date, y = clean_cnt, colour = "Counts")) +
+  geom_line(data = daily_data, aes(x = Date, y = cnt_ma,   colour = "Weekly Moving Average"))  +
+  geom_line(data = daily_data, aes(x = Date, y = cnt_ma30, colour = "Monthly Moving Average"))  +
+  ylab('Bicycle Count') + 
+  theme_classic() + 
+  ggtitle("Bike Share Counts by Day, Weekly, and Monthly Moving Average")
+```
+
+The building blocks of a time series analysis are:
+
+* Seasonality - Is there an increase relative to time of year 
+* Trend - Is there a general increase over time 
+* Cycle - Increasing/decreasing patterns that aren't seasonal
+
+Additive & Multiplicative models: 
+$$Y = S_t + T_t + E_t$$$$Y = S_t * T_t * E_t$$ 
+
+Let's look at the decomposed time series.  Decomposing the time series into different components allows us to decide if we want to remove components. 
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+
+# start with counts by day & turn into time series 
+daily_data$cnt_ma = forecast::ma(daily_data$clean_cnt, order=7) # using the clean count with no outliers
+
+
+count_ma = ts(na.omit(daily_data$cnt_ma), frequency=30) # time series 
+decomp = stl(count_ma, s.window="periodic") # assumes additive model structure by default 
+deseasonal_cnt <- forecast::seasadj(decomp)
+plot(decomp) 
+```
+
+
+Fitting an ARIMA model requires the series to be stationary. A series is said to be stationary when its mean, variance, and autocovariance are time invariant. Since ARIMA uses previous lags of series to model its behavior, modeling stable series with consistent properties involves less uncertainty.
+
+For forecasting, it is important to be stationary. So I need to test for it. Null hypothesis assumes that series is non-stationary. 
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+
+adf.test(count_ma, alternative = "stationary") 
+
+```
+
+
+The p-value is 0.99, which is greater than 0.05, which means we fail to reject the null hypothesis that the series is non-stationary. Let's try to help the series out. Differencing (d) will be an input to ARIMA later on. 
+
+ACF plots display correlation between a series and its lags.
+
+```{r, warning= FALSE, message = FALSE, echo = FALSE}
+forecast::Acf(count_ma, main='')
+
+forecast::Pacf(count_ma, main='')
+
+count_d1 = diff(deseasonal_cnt, differences = 1)
+plot(count_d1)
+adf.test(count_d1, alternative = "stationary")
+
+```
+
+P-value is now less than 0.05, so we reject the null hypothesis that the series is non-stationary and conclude the transformed series is stationary. 
+
+```{r,warning= FALSE, message = FALSE, echo = FALSE}
+forecast::Acf(count_d1, main='ACF for Differenced Series')
+forecast::Pacf(count_d1, main='PACF for Differenced Series')
+
+```
+
+
+## Fitting ARIMA 
+
+We will use BIC to evaluate the model (lower is better). 
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+forecast::auto.arima(deseasonal_cnt, seasonal=FALSE)
+```
+
+The model can be written as: 
+$$ \hat Y_{d_t} = 0.551 Y_{t-1} - 0.2496 e_{t-1} + E$$
+
+To evaluate the model, we want to look at the residuals. 
+
+### Residuals 
+
+```{r, warning= FALSE, message = FALSE, echo = FALSE}
+fit <- forecast::auto.arima(deseasonal_cnt, seasonal=FALSE)
+forecast::tsdisplay(residuals(fit), lag.max=45, main='(1,1,1) Model Residuals')
+
+```
+
+
+There is something going on at lag 7 based on the PACF chart. Let's try to specify the ARIMA explicitly.
+
+```{r, warning= FALSE, message = FALSE, echo = FALSE}
+# based on input from previous model, specify the MA order as 7 (weekly)
+fit2 = arima(deseasonal_cnt, order=c(1,1,7))
+
+fit2
+
+forecast::tsdisplay(residuals(fit2), lag.max=15, main='Seasonal Model Residuals')
+
+```
+
+The AIC for the second model with MA = 7 is lower, so this model has better fit than the auto-ARIMA choice. 
+
+
+### Let's forecast
+
+Let's forecast out the next 30 days using our second model. 
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+fcast <- forecast::forecast(fit2, h=30)
+plot(fcast)
+```
+
+To see how our model performs against actual, we can specify a hold out group and then forecast for that period. 
+```{r, warning= FALSE, message = FALSE, echo = FALSE}
+hold <- window(ts(deseasonal_cnt), start=700)
+
+fit_no_holdout = arima(ts(deseasonal_cnt[-c(700:725)]), order=c(1,1,7))
+
+fcast_no_holdout <- forecast::forecast(fit_no_holdout,h=25)
+plot(fcast_no_holdout, main=" ") 
+lines(ts(deseasonal_cnt))  
+```
+
+
+```{r, warning = FALSE, echo = FALSE, message = FALSE, include = FALSE}
+# start to finish series 
+counts_series <- ts(daily_data$cnt)
+counts_series_clean <- forecast::tsclean(counts_series)
+autoplot(counts_series_clean)
+#stl(counts_series_clean, )
+#auto.arima(counts_)
+
+```
+
+
+
+
+Let's add back in seasonality & evaluate the fit. We need to specify the model using auto.arima(), then forecast using forecast() and input the arima model object and number of periods for forecasting. 
+
+```{r, warning = FALSE, mesaage = FALSE, echo = FALSE}
+fit_w_seasonality = forecast::auto.arima(deseasonal_cnt, seasonal=TRUE)
+fit_w_seasonality
+
+autoplot(deseasonal_cnt) + 
+  ggtitle("Deseasonal Time Series") + 
+  theme_classic()
+
+
+
+# forecast with seasonality 
+seas_fcast <- forecast::forecast(fit_w_seasonality, h=30)
+plot(seas_fcast)
+forecast::tsdisplay(residuals(seas_fcast), lag.max=45, main='(2,1,2) Model Residuals')
+
+# Run BIC to compare models 
+BIC(fit)
+BIC(fit2) # better fit (lower BIC)
+BIC(fit_w_seasonality) # Better than 1st, wose than second 
+
+# Quick TS plot of final series 
+
+```
+
+## Conclusion / What have I learned: 
+
+What is true for other modeling appears to hold true for time-series forecasting. It is an iterative approach that requires building a simple model (auto-ARIMA), looking at the residuals and model evaluation metric of choice (e.g. AIC or BIC). 
+
+Packages used: forecast, time series, ggplot2, ggfortify 
+
+The general steps I followed were: 
+
+* Prep data environment (load packages/data)
+* Plot bike share counts by day & visually inspect for outliers
+* Convert to time series & using tsclean() to remove outliers from time series object 
+* Aggregate counts to weekly moving average using ma function
+* Create time series object from weekly moving average column appended to original data set (by day)
+* Input time series into stl() function to decompose seasonal, trend, and cycle components 
+* Run the ADF test to test if the series is stationary or if transformations need to be run 
+* Use differences of order 1 to improve stationary result. 
+* Iterate upon model fit by using tsdisplay to visually inspect residuals, ACF, and PACF plots, along with AIC/BIC output. 
+* Use final model to forecast in the future. To evaluate forecast, can use a holdout group and plot over actuals. 
+
+
+

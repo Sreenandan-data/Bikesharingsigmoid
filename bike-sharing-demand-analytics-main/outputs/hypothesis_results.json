@@ -1,0 +1,266 @@
+{
+  "research_question": "Is bike demand during commuting hours higher on working days than on non-working days?",
+  "H0": "The mean daily rental total across the commuting windows is the same for working and non-working days.",
+  "H1": "The mean daily rental total across the commuting windows is higher on working days.",
+  "alpha": 0.05,
+  "commute_windows": {
+    "morning_hours": [
+      7,
+      8
+    ],
+    "evening_hours": [
+      16,
+      17,
+      18
+    ],
+    "description": "07:00-08:59 and 16:00-18:59 (hr values 7-8 and 16-18)"
+  },
+  "n_days": 731,
+  "n_days_incomplete_window": 6,
+  "n_holiday_dates": 21,
+  "n_missing_hours_total": 165,
+  "primary": {
+    "n_working": 500,
+    "n_nonworking": 231,
+    "mean_working": 2068.512,
+    "mean_nonworking": 1105.1774891774892,
+    "median_working": 2078.0,
+    "median_nonworking": 1096.0,
+    "sd_working": 862.8616356406866,
+    "sd_nonworking": 566.3654670560948,
+    "mean_difference": 963.334510822511,
+    "ratio_of_means": 1.8716559288042118,
+    "welch_t": 17.957930613551,
+    "welch_df": 645.5830754632403,
+    "welch_p_one_sided": 4.329285688093615e-59,
+    "ci95_mean_difference_welch": [
+      857.9967964484341,
+      1068.672225196588
+    ],
+    "ci95_mean_difference_bootstrap": [
+      857.2652097402598,
+      1069.181936147186
+    ],
+    "cohens_d": 1.2325816244982184,
+    "hedges_g": 1.2313131013855272,
+    "mann_whitney_u": 94178.5,
+    "mann_whitney_p_one_sided": 3.648069332773844e-43,
+    "rank_biserial": 0.6307965367965367
+  },
+  "reject_H0": true,
+  "assumptions": {
+    "shapiro_p_working": 4.5317271411812274e-07,
+    "shapiro_p_nonworking": 0.0030692101640140915,
+    "skew_working": -0.09326452322756429,
+    "skew_nonworking": 0.22376830462117214,
+    "levene_p": 6.337638444295893e-10,
+    "residual_lag1_autocorrelation": 0.7943442131535007,
+    "durbin_watson": 0.410172212937618
+  },
+  "sensitivity": {
+    "complete_windows_only": {
+      "n_working": 495,
+      "n_nonworking": 230,
+      "mean_working": 2087.2646464646464,
+      "mean_nonworking": 1109.3565217391304,
+      "median_working": 2093.0,
+      "median_nonworking": 1100.0,
+      "sd_working": 846.5591326322952,
+      "sd_nonworking": 564.0201332976877,
+      "mean_difference": 977.908124725516,
+      "ratio_of_means": 1.881509330465247,
+      "welch_t": 18.379499217754347,
+      "welch_df": 636.1929125471598,
+      "welch_p_one_sided": 3.885355070220202e-61,
+      "ci95_mean_difference_welch": [
+        873.4266049133281,
+        1082.389644537704
+      ],
+      "ci95_mean_difference_bootstrap": [
+        873.8377755819059,
+        1083.3525988142294
+      ],
+      "cohens_d": 1.272664995671917,
+      "hedges_g": 1.2713443471118977,
+      "mann_whitney_u": 93624.5,
+      "mann_whitney_p_one_sided": 9.85383612386383e-45,
+      "rank_biserial": 0.6446991655687309
+    },
+    "year_2011": {
+      "n_working": 250,
+      "n_nonworking": 115,
+      "mean_working": 1535.584,
+      "mean_nonworking": 858.6086956521739,
+      "median_working": 1739.0,
+      "median_nonworking": 880.0,
+      "sd_working": 591.5257066183696,
+      "sd_nonworking": 418.76069655156743,
+      "mean_difference": 676.9753043478262,
+      "ratio_of_means": 1.7884561474579705,
+      "welch_t": 12.518380451902999,
+      "welch_df": 302.5977691021798,
+      "welch_p_one_sided": 1.4784776710066317e-29,
+      "ci95_mean_difference_welch": [
+        570.5577510876359,
+        783.3928576080165
+      ],
+      "ci95_mean_difference_bootstrap": [
+        572.5204086956521,
+        782.2932695652174
+      ],
+      "cohens_d": 1.2462271764970125,
+      "hedges_g": 1.2436505524243102,
+      "mann_whitney_u": 23017.5,
+      "mann_whitney_p_one_sided": 1.3681136173074193e-20,
+      "rank_biserial": 0.6012173913043479
+    },
+    "year_2012": {
+      "n_working": 250,
+      "n_nonworking": 116,
+      "mean_working": 2601.44,
+      "mean_nonworking": 1349.6206896551723,
+      "median_working": 2702.0,
+      "median_nonworking": 1471.0,
+      "sd_working": 756.2024165387973,
+      "sd_nonworking": 588.7578472501667,
+      "mean_difference": 1251.8193103448277,
+      "ratio_of_means": 1.9275341730754492,
+      "welch_t": 17.234765757735413,
+      "welch_df": 282.09839040221567,
+      "welch_p_one_sided": 2.8706290527542898e-46,
+      "ci95_mean_difference_welch": [
+        1108.8471134283939,
+        1394.7915072612616
+      ],
+      "ci95_mean_difference_bootstrap": [
+        1109.3923068965516,
+        1393.7052517241382
+      ],
+      "cohens_d": 1.7691164737157803,
+      "hedges_g": 1.7654688108833767,
+      "mann_whitney_u": 25965.0,
+      "mann_whitney_p_one_sided": 2.15203437154716e-34,
+      "rank_biserial": 0.7906896551724139
+    },
+    "excluding_holidays_from_nonworking": {
+      "n_working": 500,
+      "n_nonworking": 210,
+      "mean_working": 2068.512,
+      "mean_nonworking": 1107.009523809524,
+      "median_working": 2078.0,
+      "median_nonworking": 1100.0,
+      "sd_working": 862.8616356406866,
+      "sd_nonworking": 550.0720439155037,
+      "mean_difference": 961.5024761904763,
+      "ratio_of_means": 1.8685584500498984,
+      "welch_t": 17.763272209204132,
+      "welch_df": 597.1012006061815,
+      "welch_p_one_sided": 2.7180720761860384e-57,
+      "ci95_mean_difference_welch": [
+        855.1967316303738,
+        1067.8082207505788
+      ],
+      "ci95_mean_difference_bootstrap": [
+        855.1231261904762,
+        1068.8421000000003
+      ],
+      "cohens_d": 1.2269939693488354,
+      "hedges_g": 1.2256937284770422,
+      "mann_whitney_u": 85679.0,
+      "mann_whitney_p_one_sided": 1.1262152789429629e-40,
+      "rank_biserial": 0.6319809523809523
+    }
+  },
+  "adjusted_ols_hac": {
+    "formula": "log_commute ~ workingday + temp + I(temp**2) + hum + windspeed + C(weathersit_max) + C(mnth) + yr",
+    "n": 731,
+    "r2": 0.682318905218017,
+    "workingday_coef_log": 0.6371732349338133,
+    "workingday_ci95_log": [
+      0.5731196292128655,
+      0.701226840654761
+    ],
+    "workingday_multiplier": 1.8911275432829653,
+    "workingday_multiplier_ci95": [
+      1.773792002401981,
+      2.016224777268434
+    ],
+    "workingday_z_hac": 19.49674149217706,
+    "workingday_p_one_sided_hac": 5.850159756922361e-85,
+    "linear_workingday_coef": 927.9336248750637,
+    "linear_workingday_ci95": [
+      847.9821794291847,
+      1007.8850703209428
+    ],
+    "linear_workingday_p_two_sided_hac": 1.5100941827704114e-114
+  },
+  "secondary_weather_hypothesis": {
+    "definition": "Rainy day = at least one hour with weathersit >= 3 (light rain/snow or worse).",
+    "n_not_rainy": 431,
+    "n_rainy": 300,
+    "mean_not_rainy": 4845.510440835267,
+    "mean_rainy": 4014.213333333333,
+    "median_not_rainy": 4795.0,
+    "median_rainy": 4101.0,
+    "welch_t": 5.892593399590158,
+    "welch_p_one_sided": 3.020981372210895e-09,
+    "mann_whitney_p_one_sided": 1.2402183763780692e-08,
+    "mean_within_season_year_difference": 828.6843804706548,
+    "n_strata": 8
+  },
+  "hourly_profile": {
+    "nonworking": {
+      "0": 90.8,
+      "1": 69.5,
+      "2": 53.2,
+      "3": 25.8,
+      "4": 8.3,
+      "5": 8.7,
+      "6": 18.7,
+      "7": 43.4,
+      "8": 105.7,
+      "9": 171.6,
+      "10": 255.9,
+      "11": 315.3,
+      "12": 366.3,
+      "13": 372.7,
+      "14": 364.6,
+      "15": 358.8,
+      "16": 352.7,
+      "17": 323.5,
+      "18": 281.1,
+      "19": 231.7,
+      "20": 174.7,
+      "21": 142.1,
+      "22": 116.1,
+      "23": 85.9
+    },
+    "working": {
+      "0": 36.8,
+      "1": 16.6,
+      "2": 8.7,
+      "3": 4.9,
+      "4": 5.4,
+      "5": 24.9,
+      "6": 102.5,
+      "7": 290.6,
+      "8": 477.0,
+      "9": 241.5,
+      "10": 135.4,
+      "11": 158.2,
+      "12": 200.8,
+      "13": 198.4,
+      "14": 183.6,
+      "15": 201.3,
+      "16": 293.1,
+      "17": 525.3,
+      "18": 492.2,
+      "19": 348.4,
+      "20": 249.7,
+      "21": 186.3,
+      "22": 138.4,
+      "23": 88.7
+    }
+  },
+  "all_checks_significant": true
+}

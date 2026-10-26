@@ -1,0 +1,780 @@
+{
+  "reports": [
+    {
+      "dataset": "hour.csv",
+      "n_rows": 17379,
+      "n_cols": 17,
+      "passed": true,
+      "checks": [
+        {
+          "name": "columns",
+          "passed": true,
+          "detail": "Observed columns: ['instant', 'dteday', 'season', 'yr', 'mnth', 'hr', 'holiday', 'weekday', 'workingday', 'weathersit', 'temp', 'atemp', 'hum', 'windspeed', 'casual', 'registered', 'cnt']",
+          "severity": "error"
+        },
+        {
+          "name": "row_count",
+          "passed": true,
+          "detail": "Observed 17379 rows; README documents 17379.",
+          "severity": "error"
+        },
+        {
+          "name": "missing_values",
+          "passed": true,
+          "detail": "No missing values.",
+          "severity": "error"
+        },
+        {
+          "name": "exact_duplicate_rows",
+          "passed": true,
+          "detail": "0 exact duplicate rows.",
+          "severity": "error"
+        },
+        {
+          "name": "duplicate_instant",
+          "passed": true,
+          "detail": "0 duplicate `instant` identifiers.",
+          "severity": "error"
+        },
+        {
+          "name": "duplicate_time_key",
+          "passed": true,
+          "detail": "0 duplicate ['dteday', 'hr'] keys.",
+          "severity": "error"
+        },
+        {
+          "name": "date_parsing",
+          "passed": true,
+          "detail": "0 unparseable dates; range 2011-01-01 to 2012-12-31.",
+          "severity": "error"
+        },
+        {
+          "name": "chronological_order",
+          "passed": true,
+          "detail": "Records are in chronological order.",
+          "severity": "error"
+        },
+        {
+          "name": "instant_sequential",
+          "passed": true,
+          "detail": "`instant` increments by 1 for every row.",
+          "severity": "error"
+        },
+        {
+          "name": "domain_season",
+          "passed": true,
+          "detail": "Observed values [1, 2, 3, 4]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_yr",
+          "passed": true,
+          "detail": "Observed values [0, 1]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_mnth",
+          "passed": true,
+          "detail": "Observed values [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_hr",
+          "passed": true,
+          "detail": "Observed values [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_holiday",
+          "passed": true,
+          "detail": "Observed values [0, 1]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_weekday",
+          "passed": true,
+          "detail": "Observed values [0, 1, 2, 3, 4, 5, 6]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_workingday",
+          "passed": true,
+          "detail": "Observed values [0, 1]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_weathersit",
+          "passed": true,
+          "detail": "Observed values [1, 2, 3, 4]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "range_temp",
+          "passed": true,
+          "detail": "min=0.0200, max=1.0000 (expected within [0, 1]).",
+          "severity": "error"
+        },
+        {
+          "name": "range_atemp",
+          "passed": true,
+          "detail": "min=0.0000, max=1.0000 (expected within [0, 1]).",
+          "severity": "error"
+        },
+        {
+          "name": "range_hum",
+          "passed": true,
+          "detail": "min=0.0000, max=1.0000 (expected within [0, 1]).",
+          "severity": "error"
+        },
+        {
+          "name": "range_windspeed",
+          "passed": true,
+          "detail": "min=0.0000, max=0.8507 (expected within [0, 1]).",
+          "severity": "error"
+        },
+        {
+          "name": "nonnegative_casual",
+          "passed": true,
+          "detail": "0 negative values in `casual`.",
+          "severity": "error"
+        },
+        {
+          "name": "integer_casual",
+          "passed": true,
+          "detail": "`casual` contains only whole numbers.",
+          "severity": "error"
+        },
+        {
+          "name": "nonnegative_registered",
+          "passed": true,
+          "detail": "0 negative values in `registered`.",
+          "severity": "error"
+        },
+        {
+          "name": "integer_registered",
+          "passed": true,
+          "detail": "`registered` contains only whole numbers.",
+          "severity": "error"
+        },
+        {
+          "name": "nonnegative_cnt",
+          "passed": true,
+          "detail": "0 negative values in `cnt`.",
+          "severity": "error"
+        },
+        {
+          "name": "integer_cnt",
+          "passed": true,
+          "detail": "`cnt` contains only whole numbers.",
+          "severity": "error"
+        },
+        {
+          "name": "cnt_equals_components",
+          "passed": true,
+          "detail": "0 rows where cnt != casual + registered.",
+          "severity": "error"
+        },
+        {
+          "name": "year_consistent",
+          "passed": true,
+          "detail": "`yr` matches the parsed date year (0=2011, 1=2012).",
+          "severity": "error"
+        },
+        {
+          "name": "month_consistent",
+          "passed": true,
+          "detail": "`mnth` matches the parsed date month.",
+          "severity": "error"
+        },
+        {
+          "name": "weekday_consistent",
+          "passed": true,
+          "detail": "`weekday` matches the parsed date (0=Sunday ... 6=Saturday).",
+          "severity": "error"
+        },
+        {
+          "name": "workingday_rule",
+          "passed": true,
+          "detail": "0 rows violate workingday = (not weekend) and (not holiday).",
+          "severity": "error"
+        },
+        {
+          "name": "season_calendar_note",
+          "passed": true,
+          "detail": "Months observed per season code: 1: [1, 2, 3, 12]; 2: [3, 4, 5, 6]; 3: [6, 7, 8, 9]; 4: [9, 10, 11, 12]. Season changes at the astronomical equinox/solstice dates (~21st of Mar/Jun/Sep/Dec), so code 1 (README 'spring') mostly contains January-March dates.",
+          "severity": "info"
+        },
+        {
+          "name": "humidity_zero",
+          "passed": false,
+          "detail": "22 rows with humidity exactly 0 (physically implausible; dates: ['2011-03-10']). Kept but flagged.",
+          "severity": "info"
+        },
+        {
+          "name": "windspeed_zero",
+          "passed": true,
+          "detail": "2180 rows with wind speed exactly 0; plausible for calm conditions but may also encode missing readings. Kept as-is.",
+          "severity": "info"
+        },
+        {
+          "name": "hourly_sequence_gaps",
+          "passed": true,
+          "detail": "165 of 17544 possible hourly timestamps are absent across 76 dates. README describes the files as aggregated counts, so absent hours are most plausibly hours with no recorded rentals or system downtime, not dropped rows. They are documented, not imputed.",
+          "severity": "info"
+        },
+        {
+          "name": "cnt_outliers",
+          "passed": true,
+          "detail": "505 hourly counts exceed the global IQR fence (642); 51 rows have a |robust z| > 3.5 relative to the median for the same hour and working-day status. These are flagged for investigation, NOT removed.",
+          "severity": "info"
+        }
+      ],
+      "extras": {
+        "dtypes": {
+          "instant": "int64",
+          "dteday": "str",
+          "season": "int64",
+          "yr": "int64",
+          "mnth": "int64",
+          "hr": "int64",
+          "holiday": "int64",
+          "weekday": "int64",
+          "workingday": "int64",
+          "weathersit": "int64",
+          "temp": "float64",
+          "atemp": "float64",
+          "hum": "float64",
+          "windspeed": "float64",
+          "casual": "int64",
+          "registered": "int64",
+          "cnt": "int64"
+        },
+        "season_to_months": {
+          "1": [
+            1,
+            2,
+            3,
+            12
+          ],
+          "2": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "3": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "4": [
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "zero_humidity_rows": 22,
+        "zero_windspeed_rows": 2180,
+        "hourly_gap_count": 165,
+        "days_with_missing_hours": 76,
+        "largest_daily_gaps": {
+          "2012-10-29": 23,
+          "2011-01-27": 16,
+          "2012-10-30": 13,
+          "2011-01-18": 12,
+          "2011-01-26": 8,
+          "2011-08-28": 7,
+          "2011-08-27": 6,
+          "2011-02-22": 6,
+          "2011-02-11": 2,
+          "2011-01-03": 2
+        },
+        "hours_per_day_distribution": {
+          "1": 1,
+          "8": 1,
+          "11": 1,
+          "12": 1,
+          "16": 1,
+          "17": 1,
+          "18": 2,
+          "22": 6,
+          "23": 62,
+          "24": 655
+        },
+        "cnt_iqr_upper_fence": 642.5,
+        "cnt_iqr_outliers": 505,
+        "conditional_outliers": 51,
+        "conditional_outlier_examples": [
+          {
+            "dteday": "2012-04-16",
+            "hr": 7,
+            "workingday": 0,
+            "weathersit": 1,
+            "cnt": 387,
+            "robust_z": 13.04
+          },
+          {
+            "dteday": "2012-11-07",
+            "hr": 0,
+            "workingday": 1,
+            "weathersit": 2,
+            "cnt": 283,
+            "robust_z": 12.04
+          },
+          {
+            "dteday": "2012-11-07",
+            "hr": 2,
+            "workingday": 1,
+            "weathersit": 2,
+            "cnt": 74,
+            "robust_z": 11.3
+          },
+          {
+            "dteday": "2012-09-09",
+            "hr": 5,
+            "workingday": 0,
+            "weathersit": 1,
+            "cnt": 55,
+            "robust_z": 10.79
+          },
+          {
+            "dteday": "2012-07-20",
+            "hr": 3,
+            "workingday": 1,
+            "weathersit": 2,
+            "cnt": 36,
+            "robust_z": 10.79
+          },
+          {
+            "dteday": "2011-05-02",
+            "hr": 1,
+            "workingday": 1,
+            "weathersit": 1,
+            "cnt": 114,
+            "robust_z": 9.64
+          },
+          {
+            "dteday": "2012-04-16",
+            "hr": 6,
+            "workingday": 0,
+            "weathersit": 1,
+            "cnt": 133,
+            "robust_z": 8.77
+          },
+          {
+            "dteday": "2012-04-16",
+            "hr": 8,
+            "workingday": 0,
+            "weathersit": 2,
+            "cnt": 597,
+            "robust_z": 8.7
+          },
+          {
+            "dteday": "2012-11-12",
+            "hr": 7,
+            "workingday": 0,
+            "weathersit": 1,
+            "cnt": 264,
+            "robust_z": 8.43
+          },
+          {
+            "dteday": "2012-11-12",
+            "hr": 8,
+            "workingday": 0,
+            "weathersit": 1,
+            "cnt": 540,
+            "robust_z": 7.71
+          }
+        ]
+      }
+    },
+    {
+      "dataset": "day.csv",
+      "n_rows": 731,
+      "n_cols": 16,
+      "passed": true,
+      "checks": [
+        {
+          "name": "columns",
+          "passed": true,
+          "detail": "Observed columns: ['instant', 'dteday', 'season', 'yr', 'mnth', 'holiday', 'weekday', 'workingday', 'weathersit', 'temp', 'atemp', 'hum', 'windspeed', 'casual', 'registered', 'cnt']",
+          "severity": "error"
+        },
+        {
+          "name": "row_count",
+          "passed": true,
+          "detail": "Observed 731 rows; README documents 731.",
+          "severity": "error"
+        },
+        {
+          "name": "missing_values",
+          "passed": true,
+          "detail": "No missing values.",
+          "severity": "error"
+        },
+        {
+          "name": "exact_duplicate_rows",
+          "passed": true,
+          "detail": "0 exact duplicate rows.",
+          "severity": "error"
+        },
+        {
+          "name": "duplicate_instant",
+          "passed": true,
+          "detail": "0 duplicate `instant` identifiers.",
+          "severity": "error"
+        },
+        {
+          "name": "duplicate_time_key",
+          "passed": true,
+          "detail": "0 duplicate ['dteday'] keys.",
+          "severity": "error"
+        },
+        {
+          "name": "date_parsing",
+          "passed": true,
+          "detail": "0 unparseable dates; range 2011-01-01 to 2012-12-31.",
+          "severity": "error"
+        },
+        {
+          "name": "chronological_order",
+          "passed": true,
+          "detail": "Records are in chronological order.",
+          "severity": "error"
+        },
+        {
+          "name": "instant_sequential",
+          "passed": true,
+          "detail": "`instant` increments by 1 for every row.",
+          "severity": "error"
+        },
+        {
+          "name": "domain_season",
+          "passed": true,
+          "detail": "Observed values [1, 2, 3, 4]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_yr",
+          "passed": true,
+          "detail": "Observed values [0, 1]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_mnth",
+          "passed": true,
+          "detail": "Observed values [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_holiday",
+          "passed": true,
+          "detail": "Observed values [0, 1]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_weekday",
+          "passed": true,
+          "detail": "Observed values [0, 1, 2, 3, 4, 5, 6]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_workingday",
+          "passed": true,
+          "detail": "Observed values [0, 1]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "domain_weathersit",
+          "passed": true,
+          "detail": "Observed values [1, 2, 3]; invalid: []",
+          "severity": "error"
+        },
+        {
+          "name": "range_temp",
+          "passed": true,
+          "detail": "min=0.0591, max=0.8617 (expected within [0, 1]).",
+          "severity": "error"
+        },
+        {
+          "name": "range_atemp",
+          "passed": true,
+          "detail": "min=0.0791, max=0.8409 (expected within [0, 1]).",
+          "severity": "error"
+        },
+        {
+          "name": "range_hum",
+          "passed": true,
+          "detail": "min=0.0000, max=0.9725 (expected within [0, 1]).",
+          "severity": "error"
+        },
+        {
+          "name": "range_windspeed",
+          "passed": true,
+          "detail": "min=0.0224, max=0.5075 (expected within [0, 1]).",
+          "severity": "error"
+        },
+        {
+          "name": "nonnegative_casual",
+          "passed": true,
+          "detail": "0 negative values in `casual`.",
+          "severity": "error"
+        },
+        {
+          "name": "integer_casual",
+          "passed": true,
+          "detail": "`casual` contains only whole numbers.",
+          "severity": "error"
+        },
+        {
+          "name": "nonnegative_registered",
+          "passed": true,
+          "detail": "0 negative values in `registered`.",
+          "severity": "error"
+        },
+        {
+          "name": "integer_registered",
+          "passed": true,
+          "detail": "`registered` contains only whole numbers.",
+          "severity": "error"
+        },
+        {
+          "name": "nonnegative_cnt",
+          "passed": true,
+          "detail": "0 negative values in `cnt`.",
+          "severity": "error"
+        },
+        {
+          "name": "integer_cnt",
+          "passed": true,
+          "detail": "`cnt` contains only whole numbers.",
+          "severity": "error"
+        },
+        {
+          "name": "cnt_equals_components",
+          "passed": true,
+          "detail": "0 rows where cnt != casual + registered.",
+          "severity": "error"
+        },
+        {
+          "name": "year_consistent",
+          "passed": true,
+          "detail": "`yr` matches the parsed date year (0=2011, 1=2012).",
+          "severity": "error"
+        },
+        {
+          "name": "month_consistent",
+          "passed": true,
+          "detail": "`mnth` matches the parsed date month.",
+          "severity": "error"
+        },
+        {
+          "name": "weekday_consistent",
+          "passed": true,
+          "detail": "`weekday` matches the parsed date (0=Sunday ... 6=Saturday).",
+          "severity": "error"
+        },
+        {
+          "name": "workingday_rule",
+          "passed": true,
+          "detail": "0 rows violate workingday = (not weekend) and (not holiday).",
+          "severity": "error"
+        },
+        {
+          "name": "season_calendar_note",
+          "passed": true,
+          "detail": "Months observed per season code: 1: [1, 2, 3, 12]; 2: [3, 4, 5, 6]; 3: [6, 7, 8, 9]; 4: [9, 10, 11, 12]. Season changes at the astronomical equinox/solstice dates (~21st of Mar/Jun/Sep/Dec), so code 1 (README 'spring') mostly contains January-March dates.",
+          "severity": "info"
+        },
+        {
+          "name": "humidity_zero",
+          "passed": false,
+          "detail": "1 rows with humidity exactly 0 (physically implausible; dates: ['2011-03-10']). Kept but flagged.",
+          "severity": "info"
+        },
+        {
+          "name": "windspeed_zero",
+          "passed": true,
+          "detail": "0 rows with wind speed exactly 0; plausible for calm conditions but may also encode missing readings. Kept as-is.",
+          "severity": "info"
+        },
+        {
+          "name": "daily_sequence_complete",
+          "passed": true,
+          "detail": "0 calendar dates missing from day.csv.",
+          "severity": "error"
+        },
+        {
+          "name": "daily_cnt_outliers",
+          "passed": true,
+          "detail": "0 days fall outside the IQR fences [-1054, 10162]. Five lowest days: 2012-10-29 (22), 2011-01-27 (431), 2012-12-26 (441), 2011-01-26 (506), 2011-03-06 (605). Retained as genuine (weather/event) observations.",
+          "severity": "info"
+        }
+      ],
+      "extras": {
+        "dtypes": {
+          "instant": "int64",
+          "dteday": "str",
+          "season": "int64",
+          "yr": "int64",
+          "mnth": "int64",
+          "holiday": "int64",
+          "weekday": "int64",
+          "workingday": "int64",
+          "weathersit": "int64",
+          "temp": "float64",
+          "atemp": "float64",
+          "hum": "float64",
+          "windspeed": "float64",
+          "casual": "int64",
+          "registered": "int64",
+          "cnt": "int64"
+        },
+        "season_to_months": {
+          "1": [
+            1,
+            2,
+            3,
+            12
+          ],
+          "2": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "3": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "4": [
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "zero_humidity_rows": 1,
+        "zero_windspeed_rows": 0,
+        "lowest_days": [
+          {
+            "dteday": "2012-10-29",
+            "cnt": 22,
+            "weathersit": 3,
+            "holiday": 0
+          },
+          {
+            "dteday": "2011-01-27",
+            "cnt": 431,
+            "weathersit": 1,
+            "holiday": 0
+          },
+          {
+            "dteday": "2012-12-26",
+            "cnt": 441,
+            "weathersit": 3,
+            "holiday": 0
+          },
+          {
+            "dteday": "2011-01-26",
+            "cnt": 506,
+            "weathersit": 3,
+            "holiday": 0
+          },
+          {
+            "dteday": "2011-03-06",
+            "cnt": 605,
+            "weathersit": 2,
+            "holiday": 0
+          }
+        ]
+      }
+    },
+    {
+      "dataset": "hour.csv vs day.csv",
+      "n_rows": 731,
+      "n_cols": 16,
+      "passed": true,
+      "checks": [
+        {
+          "name": "same_dates",
+          "passed": true,
+          "detail": "731 dates in hour.csv vs 731 in day.csv.",
+          "severity": "error"
+        },
+        {
+          "name": "daily_sum_casual",
+          "passed": true,
+          "detail": "0 dates where summed hourly `casual` differs from day.csv (max abs diff 0).",
+          "severity": "error"
+        },
+        {
+          "name": "daily_sum_registered",
+          "passed": true,
+          "detail": "0 dates where summed hourly `registered` differs from day.csv (max abs diff 0).",
+          "severity": "error"
+        },
+        {
+          "name": "daily_sum_cnt",
+          "passed": true,
+          "detail": "0 dates where summed hourly `cnt` differs from day.csv (max abs diff 0).",
+          "severity": "error"
+        },
+        {
+          "name": "calendar_season",
+          "passed": true,
+          "detail": "0 dates where `season` disagrees.",
+          "severity": "error"
+        },
+        {
+          "name": "calendar_yr",
+          "passed": true,
+          "detail": "0 dates where `yr` disagrees.",
+          "severity": "error"
+        },
+        {
+          "name": "calendar_mnth",
+          "passed": true,
+          "detail": "0 dates where `mnth` disagrees.",
+          "severity": "error"
+        },
+        {
+          "name": "calendar_holiday",
+          "passed": true,
+          "detail": "0 dates where `holiday` disagrees.",
+          "severity": "error"
+        },
+        {
+          "name": "calendar_weekday",
+          "passed": true,
+          "detail": "0 dates where `weekday` disagrees.",
+          "severity": "error"
+        },
+        {
+          "name": "calendar_workingday",
+          "passed": true,
+          "detail": "0 dates where `workingday` disagrees.",
+          "severity": "error"
+        },
+        {
+          "name": "calendar_constant_within_day",
+          "passed": true,
+          "detail": "Calendar attributes are constant within each date in hour.csv.",
+          "severity": "error"
+        },
+        {
+          "name": "weather_temp_agreement",
+          "passed": true,
+          "detail": "Correlation between mean hourly temp and day.csv temp: r=1.0000. (Exact equality is not expected: the daily file uses its own daily aggregation.)",
+          "severity": "info"
+        }
+      ],
+      "extras": {}
+    }
+  ],
+  "all_passed": true
+}
